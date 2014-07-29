@@ -1,0 +1,20 @@
+;;TODO Create sprite png from resized images
+(define (create-sprite files size layers)
+    #f)
+
+;;Basic image resizer, kees track of things needed by create-sprite func
+(define (bp-resize pattern pre w h)
+    (let* ((newSize 0) (cnt 0) (frags (list)))
+    (let* ((files (cadr (file-glob pattern 1))) )
+        (while (not (null? files))
+            (let* ((fname (car files))
+                    (targetf (string-append pre fname))
+                    (image (car (gimp-file-load RUN-NONINTERACTIVE fname fname)))
+                    (drawable (car (gimp-image-get-active-layer image))))
+                (gimp-image-scale-full image w h INTERPOLATION-CUBIC)
+                (gimp-file-save RUN-NONINTERACTIVE image drawable targetf targetf)
+                (set! frags (append frags (list targetf)))
+                ( newSize (+ newSize w))
+                ( cnt (+ cnt 1))
+                (gimp-image-delete image))
+            (set! files (cdr files))))))
