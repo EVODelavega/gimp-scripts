@@ -7,6 +7,8 @@ This script allows you to resize images in batch, with or without overwriting th
 Just copy this script to your `~/.gimp/scripts` directory. Note that this directory may not exist as such, but rather be called `.gimp-[version-number]`
 That's all.
 
+On Linux, running the `install.sh` script should do the trick. It moves the `bp-resize` and `gen-sprite` functions to your gimp directory. Tested on Debian, Ubuntu 14.04 and Slackware 14.
+
 ### Usage
 
 The basic command-line usage is as follows:
@@ -27,4 +29,4 @@ The helper bash-script allows for shorter CLI input. The example above (creating
 
 Given that I'm far from a bash-scripting king, feel free to improve the script, or write your own
 
-
+This script will prompt you to create a sprite file. This will not work ATM. The sprite-generating function is currently being developed, still.
