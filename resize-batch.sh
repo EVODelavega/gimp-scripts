@@ -62,11 +62,17 @@ case "$#" in
         echo "Usage $0 pattern [prefix] dimension1 [dimension2]"
         exit 1
 esac
+scm="bp-resize"
 if [[ ${#prefix} -gt 0 ]] ; then
     echo "Resinging all $pattern files to $width x $height with prefix $prefix"
+    echo "Do you want to generate the sprite? [y/N] "
+    read ans
+    if [[ "$ans" == "y" ]] ; then
+        scm="gen-sprite"
+    fi
 else
     echo "Overwriting all $pattern files, resized to $width by $height"
 fi
-runcmd="gimp -i -b '(bp-resize \""$pattern"\" \""$prefix"\" $width $height)' -b '(gimp-quit 0)'"
+runcmd="gimp -i -b '("$scm" \""$pattern"\" \""$prefix"\" $width $height)' -b '(gimp-quit 0)'"
 eval $runcmd
 exit $?
