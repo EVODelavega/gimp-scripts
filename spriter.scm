@@ -14,15 +14,14 @@
             (set! pre (string-append pre (number->string total)))
         )
         (while (not (null? files))
-            ;; For some reason, this bit produces an illegal function error, if not, this might work
             (let* (
-                    (fname (car(files)))
+                    (fname (car files))
                     (targetf (string-append pre fname))
                     (image (car (gimp-file-load RUN-NONINTERACTIVE fname fname)))
                     (drawable (car (gimp-image-get-active-layer image)))
                   )
                 (gimp-image-scale-full image w h INTERPOLATION-CUBIC)
-                (gimp-save-file RUN-NONINTERACTIVE image drawable targetf targetf)
+                (gimp-file-save RUN-NONINTERACTIVE image drawable targetf targetf)
                 (set! layer (copy-layers sprite-file drawable))
                 (gimp-layer-set-offsets layer offset 0)
                 (set! offset (+ offset w))
