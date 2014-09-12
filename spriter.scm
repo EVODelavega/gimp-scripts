@@ -35,7 +35,7 @@
 
 (define (copy-layers image layer)
     (let* (
-            (added-layer (car (gimp-layer-copy layer 1)))
+            (added-layer (aref (car (gimp-layer-copy layer 1)) 0))
           )
         (gimp-image-add-layer image added-layer 0)
         added-layer
